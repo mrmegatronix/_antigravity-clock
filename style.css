@@ -625,15 +625,9 @@ body {
     }
 }
 
-/* Preview Button - Hidden by default */
-/* Old duplicate block removed */
-
-.preview-btn:hover {
+/* Preview Buttons - Hidden until container hover */
+.btn-container:hover .preview-btn {
     opacity: 1;
-    /* Visible on hover */
-    background: rgba(255, 255, 255, 0.5);
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 .preview-btn {
@@ -651,9 +645,12 @@ body {
     /* Above everything */
     font-weight: 500;
     backdrop-filter: blur(4px);
+    opacity: 0;
+    /* Hidden by default */
 }
 
 .preview-btn:hover {
+    opacity: 1;
     background: rgba(255, 255, 255, 0.5);
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
@@ -666,8 +663,8 @@ body {
     font-family: 'Courier New', Courier, monospace;
     font-weight: 900;
     /* Rotation and styling to match the scene */
-    transform: rotate(-2deg) scale(1.5);
-    /* Scale up for visibility */
+    transform: rotate(-2deg) scale(0.75);
+    /* Reduced size by 50% from 1.5 */
     transform-origin: bottom left;
     pointer-events: none;
     filter: drop-shadow(10px 10px 10px rgba(0, 0, 0, 0.5));
