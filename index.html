@@ -14,8 +14,7 @@
 <body>
     <div class="banner">
         JOIN US... From 8pm, Wednesday 31st December<br>
-        <span style="font-size: 0.8em; font-weight: 500;"> - for our New Years Eve Karaoke Countdown Beach Party!
-            Countdown Beach Party</span>
+        <span class="banner-subtext"> - for our New Years Eve Karaoke Countdown Beach Party!</span>
     </div>
 
     <div class="sky-container" id="sky">
@@ -36,49 +35,128 @@
         <!-- Beach -->
         <div class="beach">
 
-            <!-- Additional Props -->
-            <img src="assets/drinks_cart.png" class="prop-cart" style="right: 30%; bottom: 20px; height: 150px;">
-
+            <!-- Tussock Grasses -->
+            <div class="tussock tussock-1"></div>
+            <div class="tussock tussock-2"></div>
+            <div class="tussock tussock-3"></div>
+            <div class="tussock tussock-4"></div>
 
         </div>
 
-        <!-- Palm Trees (Left, Right-Mid, Right-Main) -->
-        <!-- Palm Trees (Left, Right-Mid, Right-Main) -->
+        <!-- Drinks Cart (outside beach to avoid clip-path) -->
+        <img src="assets/drinks_cart.png" class="prop-cart">
+
+        <!-- Palm Trees - Multiple for depth -->
+        <!-- Far left palm -->
+
+
+        <!-- Left main palm -->
         <div class="palm-tree left-tree">
-            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="180px" height="180px">
-                <g>
-                    <path style="fill:#8B4513;"
-                        d="M256,512c0,0-28.7-111.6-17.6-216.4c1.8-17.1,5.2-34.1,9.8-50.6c0,0,33.5,86.6,18.9,267" />
-                    <path style="fill:#228B22;"
-                        d="M266.3,248.5c-30.8-54.6-96.6-77.9-96.6-77.9s47.9-18.7,99.9,13.2c0,0-15.3-70.8,24.9-106.3c0,0,30.3,55-6.6,103.7c0,0,67-17.7,98.6,30.1c0,0-63.5,23.1-98.3-9.9c0,0,16.2,64-32.4,94.9C255.8,296.3,256.7,268.4,266.3,248.5z" />
+            <svg viewBox="0 0 100 200" class="tree-svg">
+                <path d="M46,200 Q52,140 54,70 Q46,140 46,200" fill="#4E342E" />
+                <path d="M48,200 Q50,130 52,75 Q48,130 48,200" fill="#5D4037" />
+                <circle cx="50" cy="78" r="4" fill="#8D6E63" />
+                <circle cx="54" cy="82" r="3.5" fill="#6D4C41" />
+                <circle cx="46" cy="81" r="3.5" fill="#795548" />
+                <g fill="#1B5E20">
+                    <path d="M50,75 Q5,55 -15,75 Q12,65 50,75" />
+                    <path d="M50,75 Q95,55 115,75 Q88,65 50,75" />
+                </g>
+                <g fill="#2E7D32">
+                    <path d="M50,75 Q15,50 0,65 Q22,60 50,75" />
+                    <path d="M50,75 Q85,50 100,65 Q78,60 50,75" />
+                    <path d="M50,75 Q50,30 45,15 Q55,40 50,75" />
+                </g>
+                <g fill="#388E3C">
+                    <path d="M50,75 Q20,60 5,75 Q25,70 50,75" />
+                    <path d="M50,75 Q80,60 95,75 Q75,70 50,75" />
+                    <path d="M50,75 Q30,40 15,50 Q35,55 50,75" />
+                    <path d="M50,75 Q70,40 85,50 Q65,55 50,75" />
+                    <path d="M50,75 Q50,35 45,25 Q55,45 50,75" />
+                    <path d="M50,75 Q40,50 25,40 Q45,55 50,75" />
+                    <path d="M50,75 Q60,50 75,40 Q55,55 50,75" />
+                </g>
+                <g fill="#43A047">
+                    <path d="M50,75 Q30,55 18,60 Q38,62 50,75" />
+                    <path d="M50,75 Q70,55 82,60 Q62,62 50,75" />
+                    <path d="M50,75 Q45,45 35,48 Q48,52 50,75" />
+                    <path d="M50,75 Q55,45 65,48 Q52,52 50,75" />
                 </g>
             </svg>
         </div>
+    </div>
 
-        <div class="palm-tree right-mid">
-            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="140px" height="140px">
-                <g>
-                    <path style="fill:#8B4513;"
-                        d="M256,512c0,0-28.7-111.6-17.6-216.4c1.8-17.1,5.2-34.1,9.8-50.6c0,0,33.5,86.6,18.9,267" />
-                    <path style="fill:#228B22;"
-                        d="M266.3,248.5c-30.8-54.6-96.6-77.9-96.6-77.9s47.9-18.7,99.9,13.2c0,0-15.3-70.8,24.9-106.3c0,0,30.3,55-6.6,103.7c0,0,67-17.7,98.6,30.1c0,0-63.5,23.1-98.3-9.9c0,0,16.2,64-32.4,94.9C255.8,296.3,256.7,268.4,266.3,248.5z" />
-                </g>
-            </svg>
-        </div>
+    <!-- Right middle palm (background) -->
+    <div class="palm-tree right-mid">
+        <svg viewBox="0 0 100 200" class="tree-svg-mid">
+            <path d="M47,200 Q51,135 53,80 Q47,135 47,200" fill="#5D4037" />
+            <circle cx="50" cy="83" r="3" fill="#795548" />
+            <circle cx="53" cy="86" r="2.5" fill="#6D4C41" />
+            <g fill="#1B5E20" opacity="0.85">
+                <path d="M50,80 Q5,60 -10,80 Q12,70 50,80" />
+                <path d="M50,80 Q95,60 110,80 Q88,70 50,80" />
+            </g>
+            <g fill="#2E7D32" opacity="0.9">
+                <path d="M50,80 Q15,65 0,80 Q20,72 50,80" />
+                <path d="M50,80 Q85,65 100,80 Q80,72 50,80" />
+                <path d="M50,80 Q35,45 20,50 Q40,60 50,80" />
+                <path d="M50,80 Q65,45 80,50 Q60,60 50,80" />
+                <path d="M50,80 Q50,40 48,25 Q52,50 50,80" />
+                <path d="M50,80 Q40,50 25,55 Q42,58 50,80" />
+                <path d="M50,80 Q60,50 75,55 Q58,58 50,80" />
+            </g>
+            <g fill="#388E3C" opacity="0.95">
+                <path d="M50,80 Q30,55 15,60 Q35,62 50,80" />
+                <path d="M50,80 Q70,55 85,60 Q65,62 50,80" />
+                <path d="M50,80 Q50,45 48,32 Q52,52 50,80" />
+            </g>
+        </svg>
+    </div>
 
-        <div class="palm-tree right-main">
-            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="220px" height="220px">
-                <g>
-                    <path style="fill:#8B4513;"
-                        d="M256,512c0,0-28.7-111.6-17.6-216.4c1.8-17.1,5.2-34.1,9.8-50.6c0,0,33.5,86.6,18.9,267" />
-                    <path style="fill:#228B22;"
-                        d="M266.3,248.5c-30.8-54.6-96.6-77.9-96.6-77.9s47.9-18.7,99.9,13.2c0,0-15.3-70.8,24.9-106.3c0,0,30.3,55-6.6,103.7c0,0,67-17.7,98.6,30.1c0,0-63.5,23.1-98.3-9.9c0,0,16.2,64-32.4,94.9C255.8,296.3,256.7,268.4,266.3,248.5z" />
-                </g>
-            </svg>
-        </div>
+    <!-- Right main palm (foreground) -->
+    <div class="palm-tree right-main">
+        <svg viewBox="0 0 100 200" class="tree-svg-main">
+            <path d="M45,200 Q53,130 55,65 Q45,130 45,200" fill="#3E2723" />
+            <path d="M47,200 Q51,125 53,70 Q47,125 47,200" fill="#4E342E" />
+            <path d="M49,200 Q50,120 51,72 Q49,120 49,200" fill="#5D4037" />
+            <circle cx="51" cy="75" r="5" fill="#8D6E63" />
+            <circle cx="56" cy="80" r="4" fill="#6D4C41" />
+            <circle cx="46" cy="79" r="4" fill="#795548" />
+            <g fill="#0D3311">
+                <path d="M51,72 Q-5,48 -20,72 Q5,60 51,72" />
+                <path d="M51,72 Q107,48 122,72 Q97,60 51,72" />
+            </g>
+            <g fill="#1B5E20">
+                <path d="M51,72 Q10,55 -5,72 Q15,65 51,72" />
+                <path d="M51,72 Q92,55 107,72 Q87,65 51,72" />
+                <path d="M51,72 Q25,25 8,38 Q32,42 51,72" />
+                <path d="M51,72 Q77,25 94,38 Q70,42 51,72" />
+            </g>
+            <g fill="#2E7D32">
+                <path d="M51,72 Q25,35 10,45 Q35,50 51,72" />
+                <path d="M51,72 Q77,35 92,45 Q67,50 51,72" />
+                <path d="M51,72 Q51,25 48,10 Q54,40 51,72" />
+                <path d="M51,72 Q35,40 18,48 Q40,52 51,72" />
+                <path d="M51,72 Q67,40 84,48 Q62,52 51,72" />
+            </g>
+            <g fill="#388E3C">
+                <path d="M51,72 Q35,50 20,55 Q40,58 51,72" />
+                <path d="M51,72 Q67,50 82,55 Q62,58 51,72" />
+                <path d="M51,72 Q51,32 49,18 Q53,42 51,72" />
+                <path d="M51,72 Q40,52 28,55 Q42,57 51,72" />
+                <path d="M51,72 Q62,52 74,55 Q60,57 51,72" />
+            </g>
+            <g fill="#43A047">
+                <path d="M51,72 Q42,55 32,58 Q45,60 51,72" />
+                <path d="M51,72 Q60,55 70,58 Q57,60 51,72" />
+                <path d="M51,72 Q48,48 40,50 Q50,55 51,72" />
+                <path d="M51,72 Q54,48 62,50 Q52,55 51,72" />
+            </g>
+        </svg>
+    </div>
 
-        <!-- Entity Container (Crabs/Sharks/Boats) -->
-        <div id="scene-entities"></div>
+    <!-- Entity Container (Crabs/Sharks/Boats) -->
+    <div id="scene-entities"></div>
     </div>
 
     <div class="overlay">
@@ -165,13 +243,16 @@
 
 
         <!-- Custom CSS Sign Post (Vector Readable Text) -->
-        <div class="sign-post-css" style="left: -10px; bottom: -100px;">
+        <div class="sign-post-css">
             <div class="sign-pole"></div>
-            <div class="sign-board sign-arrow-left">
-                <span class="sign-text">TO THE BAR</span>
+            <div class="sign-board sign-top">
+                <span class="sign-text">WELCOME TO THE BEACH PARTY</span>
             </div>
-            <div class="sign-board sign-arrow-right">
-                <span class="sign-text">BEACH PARTY</span>
+            <div class="sign-board sign-mid">
+                <span class="sign-text">GET A DRINK</span>
+            </div>
+            <div class="sign-board sign-low">
+                <span class="sign-text">SING A SONG</span>
             </div>
         </div>
 

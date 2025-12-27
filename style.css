@@ -12,10 +12,25 @@
     --ocean-dark: #48b1bf;
 
     --text-color: #ffffff;
-    --glass-bg: rgba(0, 0, 0, 0.25);
-    /* Darker for better contrast */
+    --glass-bg: rgba(0, 0, 0, 0.3);
+    /* Slightly darker for better visibility on TV */
     --glass-border: rgba(255, 255, 255, 0.2);
-    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    --glass-shadow: 0 12px 48px 0 rgba(0, 0, 0, 0.5);
+
+    /* TV Scaling Base */
+    --base-font-size: 16px;
+}
+
+@media (min-width: 1200px) {
+    :root {
+        --base-font-size: 18px;
+    }
+}
+
+@media (min-width: 1800px) {
+    :root {
+        --base-font-size: 20px;
+    }
 }
 
 * {
@@ -26,12 +41,13 @@
 
 body {
     font-family: var(--font-main);
+    font-size: var(--base-font-size);
+    font-weight: 800;
     overflow: hidden;
     height: 100vh;
     width: 100vw;
     position: relative;
     background: var(--sky-night-top);
-    /* Fallback */
 }
 
 /* Sky & Dynamic Background */
@@ -126,10 +142,10 @@ body {
 
 .ocean {
     position: absolute;
-    bottom: 80px;
+    bottom: 10vh;
     /* Overlap with beach slightly */
     width: 100%;
-    height: 250px;
+    height: 30vh;
     z-index: 5;
 }
 
@@ -137,15 +153,120 @@ body {
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: 150px;
-    /* Visible height */
+    height: 18vh;
+    /* Responsive height */
     background: var(--sand-color);
     box-shadow: 0 -10px 20px rgba(0, 0, 0, 0.1);
-    /* Depth */
     z-index: 6;
-    /* On top of ocean bottom */
     clip-path: ellipse(120% 100% at 50% 100%);
-    /* Curve */
+}
+
+/* Sand Dunes */
+.sand-dune {
+    position: absolute;
+    background: linear-gradient(to top, #e6c87a, #f0d88a);
+    border-radius: 50% 50% 0 0;
+    z-index: 7;
+    box-shadow: inset 0 -5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.dune-1 {
+    width: 25vw;
+    height: 8vh;
+    left: 5%;
+    bottom: 0;
+}
+
+.dune-2 {
+    width: 22vw;
+    height: 7vh;
+    right: 30%;
+    bottom: 0;
+}
+
+.dune-3 {
+    width: 18vw;
+    height: 5vh;
+    right: 10%;
+    bottom: 0;
+}
+
+/* Tussock Grasses - Multiple blade effect */
+.tussock {
+    position: absolute;
+    bottom: 0;
+    z-index: 8;
+    width: 3px;
+    height: 50px;
+    background: linear-gradient(to top, #5a7a1a, #8db024);
+    border-radius: 80% 80% 0 0;
+    transform-origin: bottom center;
+    filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.3));
+}
+
+.tussock::before,
+.tussock::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(to top, #6b8a23, #9acd32);
+    border-radius: 80% 80% 0 0;
+    transform-origin: bottom center;
+}
+
+.tussock::before {
+    left: -8px;
+    height: 45px;
+    transform: rotate(-12deg);
+}
+
+.tussock::after {
+    left: 8px;
+    height: 48px;
+    transform: rotate(10deg);
+}
+
+.tussock-1 {
+    left: 10%;
+    bottom: 5vh;
+    transform: scale(1.3) rotate(-5deg);
+}
+
+.tussock-2 {
+    left: 18%;
+    bottom: 4vh;
+    transform: scale(1.0) rotate(3deg);
+}
+
+.tussock-3 {
+    right: 15%;
+    bottom: 3vh;
+    transform: scale(1.2) rotate(-3deg);
+}
+
+.tussock-4 {
+    right: 22%;
+    bottom: 4vh;
+    transform: scale(0.95) rotate(5deg);
+}
+
+/* Tussock sway animation */
+@keyframes tussockSway {
+
+    0%,
+    100% {
+        transform: rotate(0deg);
+    }
+
+    50% {
+        transform: rotate(3deg);
+    }
+}
+
+.tussock::before,
+.tussock::after {
+    animation: tussockSway 4s ease-in-out infinite;
 }
 
 .wave {
@@ -202,32 +323,75 @@ body {
 
 .palm-tree {
     position: absolute;
-    bottom: 50px;
-    /* Moved up onto beach */
+    bottom: 0;
     z-index: 20;
-    /* Above beach/waves */
     transform-origin: bottom center;
-    filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.3));
+    filter: drop-shadow(8px 8px 20px rgba(0, 0, 0, 0.5));
+}
+
+.tree-svg {
+    width: 25vw;
+    height: auto;
+    max-width: 350px;
+}
+
+.tree-svg-mid {
+    width: 16vw;
+    height: auto;
+    max-width: 240px;
+}
+
+.tree-svg-main {
+    width: 28vw;
+    height: auto;
+    max-width: 420px;
+}
+
+.tree-svg-small {
+    width: 12vw;
+    height: auto;
+    max-width: 180px;
+}
+
+.tree-svg-tiny {
+    width: 8vw;
+    height: auto;
+    max-width: 120px;
+    opacity: 0.7;
+}
+
+.palm-far-left {
+    left: 8%;
+    bottom: 12vh;
+    z-index: 14;
+    animation: sway 8s ease-in-out infinite;
 }
 
 .left-tree {
-    left: -20px;
-    bottom: 40px;
-    transform: rotateY(180deg);
+    left: -2vw;
+    bottom: 0;
+    z-index: 22;
     animation: sway 7s ease-in-out infinite;
+}
+
+.left-back {
+    left: 15%;
+    bottom: 14vh;
+    z-index: 10;
+    animation: sway 9s ease-in-out infinite reverse;
 }
 
 .right-mid {
     right: 15%;
-    bottom: 80px;
-    /* Further back */
-    z-index: 18;
+    bottom: 10vh;
+    z-index: 14;
     animation: sway 6s ease-in-out infinite reverse;
 }
 
 .right-main {
-    right: -20px;
-    bottom: 20px;
+    right: -2vw;
+    bottom: 0;
+    z-index: 22;
     animation: sway 5s ease-in-out infinite;
 }
 
@@ -260,10 +424,10 @@ body {
 
 .entity-boat {
     position: absolute;
-    bottom: 220px;
-    /* Horizon */
+    bottom: 38vh;
+    /* Horizon - where sky meets ocean */
     font-size: 3rem;
-    z-index: 4;
+    z-index: 9;
     opacity: 0.8;
     filter: brightness(0.8);
     transition: left 60s linear;
@@ -352,14 +516,15 @@ body {
 .countdown-container {
     background: var(--glass-bg);
     box-shadow: var(--glass-shadow);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border: 1px solid var(--glass-border);
-    padding: 3rem 4rem;
-    border-radius: 24px;
+    padding: clamp(2rem, 5vh, 4rem) clamp(2rem, 5vw, 6rem);
+    border-radius: 32px;
     text-align: center;
     color: var(--text-color);
     animation: float 6s ease-in-out infinite;
+    max-width: 90vw;
 }
 
 @keyframes float {
@@ -377,16 +542,16 @@ body {
 }
 
 .title {
-    font-weight: 300;
+    font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 4px;
-    margin-bottom: 2rem;
-    font-size: 1.2rem;
+    letter-spacing: 0.3em;
+    margin-bottom: 2.5rem;
+    font-size: clamp(1.5rem, 4vh, 3rem);
 }
 
 .timer {
     display: flex;
-    gap: 2rem;
+    gap: clamp(1rem, 4vw, 3rem);
     justify-content: center;
 }
 
@@ -397,24 +562,28 @@ body {
 }
 
 .time-unit span {
-    font-size: 4rem;
+    font-size: clamp(3rem, 10vh, 7rem);
     font-weight: 800;
     line-height: 1;
-    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
 }
 
 .time-unit label {
-    font-size: 0.8rem;
+    font-size: clamp(0.7rem, 1.5vh, 1rem);
     text-transform: uppercase;
-    opacity: 0.8;
-    margin-top: 0.5rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    opacity: 0.9;
+    margin-top: 0.8rem;
 }
 
 .year-label {
-    margin-top: 1.5rem;
-    font-size: 2rem;
-    font-weight: 500;
-    opacity: 0.9;
+    margin-top: 2rem;
+    font-size: clamp(1.5rem, 4vh, 2.8rem);
+    font-weight: 800;
+    opacity: 0.95;
+    letter-spacing: 2px;
+    text-transform: uppercase;
 }
 
 /* Fireworks Canvas */
@@ -466,16 +635,22 @@ body {
     background: linear-gradient(90deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
     color: #222;
     text-align: center;
-    padding: 1.2rem;
+    padding: 1.5rem;
     /* Thicker */
     font-weight: 800;
-    font-size: 1.1rem;
+    font-size: clamp(1.5rem, 3vh, 2.5rem);
     z-index: 200;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     text-transform: uppercase;
     letter-spacing: 2px;
     border-bottom: 2px solid rgba(255, 255, 255, 0.5);
     animation: pulseBanner 5s infinite alternate;
+}
+
+.banner-subtext {
+    font-size: 1em;
+    font-weight: inherit;
+    opacity: 1;
 }
 
 @keyframes pulseBanner {
@@ -532,9 +707,13 @@ body {
 
 /* Prop Classes */
 .prop-cart {
-    position: absolute;
-    z-index: 15;
-    filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.2));
+    position: fixed;
+    right: -8vw;
+    bottom: -8vh;
+    height: 70vh;
+    z-index: 500;
+    filter: drop-shadow(-15px 10px 20px rgba(0, 0, 0, 0.6));
+    transform-origin: bottom right;
 }
 
 .prop-sign {
@@ -571,29 +750,32 @@ body {
 }
 
 .clock-card span {
-    font-size: 1.2rem;
-    font-weight: 600;
+    font-size: clamp(1.2rem, 3vh, 1.8rem);
+    font-weight: 800;
 }
 
 .clock-card label {
-    font-size: 0.7rem;
-    opacity: 0.7;
-    margin-top: 0.3rem;
+    font-size: clamp(0.7rem, 1.2vh, 0.9rem);
+    opacity: 0.8;
+    margin-top: 0.5rem;
     text-transform: uppercase;
+    font-weight: 800;
+    letter-spacing: 1px;
 }
 
 .main-local {
     background: rgba(255, 255, 255, 0.15);
     border: 1px solid rgba(255, 255, 255, 0.3);
-    transform: scale(1.1);
+    transform: scale(1.15);
+    margin: 0 1rem;
 }
 
 /* Celebration Styles */
 .title.celebrate {
-    font-size: 3rem;
-    /* BIGGER */
+    font-size: clamp(3rem, 10vw, 8rem);
+    /* REALLY BIG */
     color: #fff;
-    text-shadow: 0 0 20px #ff00de, 0 0 40px #ff00de;
+    text-shadow: 0 0 20px #ff00de, 0 0 40px #ff00de, 0 0 60px #ff00de;
     animation: pulseTitle 1s ease-in-out infinite alternate;
 }
 
@@ -635,10 +817,11 @@ body {
     background: rgba(255, 255, 255, 0.25);
     border: 1px solid rgba(255, 255, 255, 0.5);
     color: white;
-    padding: 0.8rem 1.5rem;
-    border-radius: 30px;
+    padding: 1rem 2rem;
+    border-radius: 40px;
     cursor: pointer;
     font-family: var(--font-main);
+    font-size: clamp(0.9rem, 1.5vh, 1.1rem);
     transition: all 0.3s ease;
     pointer-events: auto;
     z-index: 300;
@@ -656,25 +839,27 @@ body {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
-/* Custom CSS Sign Post */
 .sign-post-css {
     position: fixed;
     z-index: 500;
     font-family: 'Courier New', Courier, monospace;
     font-weight: 900;
     /* Rotation and styling to match the scene */
-    transform: rotate(-2deg) scale(0.75);
-    /* Reduced size by 50% from 1.5 */
+    transform: rotate(-2deg) scale(clamp(0.75, 1.5vh, 1.2));
+    /* Scaled for visibility */
+    left: 7vw;
+    bottom: -15vh;
     transform-origin: bottom left;
     pointer-events: none;
     filter: drop-shadow(10px 10px 10px rgba(0, 0, 0, 0.5));
 }
 
 .sign-pole {
-    width: 40px;
-    height: 800px;
+    width: 3vw;
+    min-width: 30px;
+    height: 85vh;
     background: repeating-linear-gradient(90deg, #3e2723 0%, #5d4037 40%, #3e2723 100%);
-    margin-left: 120px;
+    margin-left: 10vw;
     border-radius: 5px;
     position: relative;
 }
@@ -688,47 +873,188 @@ body {
         repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(0, 0, 0, 0.05) 10px, rgba(0, 0, 0, 0.05) 20px);
     border: 3px solid #3e2723;
     color: #2c150e;
-    /* Dark wood text color */
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 32px;
+    text-align: center;
+    font-size: clamp(18px, 3vh, 26px);
+    font-weight: 800;
     text-transform: uppercase;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.2);
     width: 350px;
 }
 
-/* Nails in the wood */
+/* Nails in the wood - ALIGNED TO POLE & CLEARED OF TEXT */
+.sign-board::before,
 .sign-board::after {
     content: '';
     position: absolute;
-    width: 10px;
-    height: 10px;
-    background: #222;
+    width: 12px;
+    height: 12px;
+    background: radial-gradient(circle at 30% 30%, #5d4037 10%, #1a0f0a 60%);
     border-radius: 50%;
-    box-shadow: 1px 1px 0 rgba(255, 255, 255, 0.3);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2);
+    /* Highlight on bottom edge */
+    z-index: 20;
+    /* On top of board, but careful with text */
+    pointer-events: none;
+    /* Center the nail horizontally on the calculated point */
+    transform: translateX(-50%);
 }
 
-.sign-arrow-left {
-    top: 60px;
+/* Ensure text floats ABOVE the nails if they ever touch */
+.sign-text {
+    position: relative;
+    z-index: 25;
+}
+
+/* CALCULATION LOGIC:
+   Pole starts at margin-left: 10vw. 
+   Pole width is 3vw. Center of pole is roughly 11.5vw.
+   We calculate the nail position relative to the board's own offset.
+*/
+
+/* Top Board (Welcome) */
+/* Board is shifted left by -100px. Nail must compensate. */
+.sign-top::before {
+    left: calc(10vw + 100px + 1.5vw);
+    top: 8px;
+}
+
+.sign-top::after {
+    left: calc(10vw + 100px + 1.5vw);
+    bottom: 8px;
+}
+
+/* Mid Board (Left Arrow) */
+/* Board is shifted left by -80px. */
+.sign-mid::before {
+    left: calc(10vw + 80px + 1.5vw);
+    top: 10px;
+}
+
+.sign-mid::after {
+    left: calc(10vw + 80px + 1.5vw);
+    bottom: 10px;
+}
+
+/* Low Board (Right Arrow) */
+/* Board is shifted right by 20px. Nail must be closer to 0 relative to board. */
+.sign-low::before {
+    left: calc(10vw - 20px + 1.5vw);
+    top: 10px;
+}
+
+.sign-low::after {
+    left: calc(10vw - 20px + 1.5vw);
+    bottom: 10px;
+}
+}
+
+/* Ensure text is always on top of nails */
+.sign-text {
+    position: relative;
+    z-index: 10;
+}
+
+/* Top Board: Nails moved to top/bottom right */
+.sign-top {
+    top: -40px;
+    left: -100px;
+    width: 450px;
+    transform: rotate(2deg);
+}
+
+.sign-top::before {
+    left: 255px;
+    top: 12px;
+}
+
+/* Top nail */
+.sign-top::after {
+    left: 255px;
+    bottom: 12px;
+}
+
+/* Bottom nail */
+
+/* Mid Board: Nails moved to top/bottom right */
+.sign-mid {
+    top: 80px;
+    left: -80px;
+    clip-path: polygon(20% 0%, 100% 0%, 100% 100%, 20% 100%, 0% 50%);
+    padding-left: 40px;
+    transform: rotate(-5deg);
+}
+
+.sign-mid::before {
+    left: 235px;
+    top: 15px;
+}
+
+.sign-mid::after {
+    left: 235px;
+    bottom: 15px;
+}
+
+/* Low Board: Nails moved to top/bottom left */
+.sign-low {
+    top: 200px;
+    left: 20px;
+    clip-path: polygon(0% 0%, 80% 0%, 100% 50%, 80% 100%, 0% 100%);
+    padding-right: 40px;
+    transform: rotate(3deg);
+}
+
+.sign-low::before {
+    left: 135px;
+    top: 15px;
+}
+
+.sign-low::after {
+    left: 135px;
+    bottom: 15px;
+}
+}
+
+/* Position the two nails for the Top Board */
+.sign-top {
+    top: -40px;
+    left: -100px;
+    width: 450px;
+    transform: rotate(2deg);
+}
+
+.sign-top::before {
+    left: 240px;
+}
+
+.sign-top::after {
+    left: 265px;
+}
+
+/* Position the two nails for the Middle Board (Left Arrow) */
+.sign-mid {
+    top: 80px;
     left: -80px;
     /* Arrow shape pointing left */
     clip-path: polygon(20% 0%, 100% 0%, 100% 100%, 20% 100%, 0% 50%);
     padding-left: 40px;
-    /* Offset for text due to clip */
     transform: rotate(-5deg);
 }
 
-.sign-arrow-left::after {
-    right: 20px;
-    top: 35px;
+.sign-mid::before {
+    left: 220px;
 }
 
-/* Nail position */
+.sign-mid::after {
+    left: 245px;
+}
 
-.sign-arrow-right {
-    top: 160px;
+/* Position the two nails for the Low Board (Right Arrow) */
+.sign-low {
+    top: 200px;
     left: 20px;
     /* Arrow shape pointing right */
     clip-path: polygon(0% 0%, 80% 0%, 100% 50%, 80% 100%, 0% 100%);
@@ -736,12 +1062,15 @@ body {
     transform: rotate(3deg);
 }
 
-.sign-arrow-right::after {
-    left: 20px;
-    top: 35px;
+.sign-low::before {
+    left: 120px;
 }
 
-/* Nail position */
+.sign-low::after {
+    left: 145px;
+}
+
+/* Nail position adjustment ends here */
 
 /* Make text extra readable */
 .sign-text {
