@@ -865,7 +865,6 @@ body {
     left: calc(10vw - 20px + 1.5vw);
     bottom: 10px;
 }
-}
 
 /* Ensure text is always on top of nails */
 .sign-text {
@@ -930,7 +929,6 @@ body {
 .sign-low::after {
     left: 135px;
     bottom: 15px;
-}
 }
 
 /* Position the two nails for the Top Board */
