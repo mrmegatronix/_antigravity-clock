@@ -1,0 +1,755 @@
+:root {
+    --font-main: 'Outfit', sans-serif;
+    --sky-day-top: #4facfe;
+    --sky-day-bottom: #00f2fe;
+    --sky-sunset-top: #fd746c;
+    --sky-sunset-bottom: #ff9068;
+    --sky-night-top: #0f2027;
+    --sky-night-bottom: #203a43;
+
+    --sand-color: #f7d794;
+    --ocean-color: #06beb6;
+    --ocean-dark: #48b1bf;
+
+    --text-color: #ffffff;
+    --glass-bg: rgba(0, 0, 0, 0.25);
+    /* Darker for better contrast */
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-main);
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+    background: var(--sky-night-top);
+    /* Fallback */
+}
+
+/* Sky & Dynamic Background */
+.sky-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, var(--sky-day-top), var(--sky-day-bottom));
+    transition: background 1s ease;
+    z-index: 0;
+}
+
+.sky-container.night {
+    background: linear-gradient(to bottom, var(--sky-night-top), var(--sky-night-bottom));
+}
+
+.sky-container.sunset {
+    background: linear-gradient(to bottom, var(--sky-sunset-top), var(--sky-sunset-bottom));
+}
+
+/* Celestial Body (Sun/Moon) */
+.celestial-body {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: #ffaa00;
+    box-shadow: 0 0 40px #ffaa00;
+    top: 20%;
+    /* Will be dynamic */
+    left: 50%;
+    /* Will be dynamic */
+    transform: translate(-50%, -50%);
+    transition: all 1s ease;
+}
+
+.sky-container.night .celestial-body {
+    background: #fdfbf7;
+    box-shadow: 0 0 20px #fdfbf7;
+}
+
+/* Clouds / Stars */
+.stars {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background-image:
+        radial-gradient(2px 2px at 20px 30px, #eee, rgba(0, 0, 0, 0)),
+        radial-gradient(2px 2px at 40px 70px, #fff, rgba(0, 0, 0, 0)),
+        radial-gradient(2px 2px at 50px 160px, #ddd, rgba(0, 0, 0, 0)),
+        radial-gradient(2px 2px at 90px 40px, #fff, rgba(0, 0, 0, 0)),
+        radial-gradient(2px 2px at 130px 80px, #fff, rgba(0, 0, 0, 0)),
+        radial-gradient(2px 2px at 160px 120px, #ddd, rgba(0, 0, 0, 0));
+    background-repeat: repeat;
+    background-size: 200px 200px;
+    opacity: 0;
+    transition: opacity 2s ease;
+    z-index: -1;
+}
+
+.sky-container.night .stars {
+    opacity: 1;
+    animation: drift 60s linear infinite;
+}
+
+@keyframes drift {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: -200px 0;
+    }
+}
+
+/* Scene: Ocean & Beach */
+.scene-container {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 60%;
+    /* Taller scene */
+    z-index: 10;
+    pointer-events: none;
+    /* Let clicks pass */
+}
+
+.ocean {
+    position: absolute;
+    bottom: 80px;
+    /* Overlap with beach slightly */
+    width: 100%;
+    height: 250px;
+    z-index: 5;
+}
+
+.beach {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 150px;
+    /* Visible height */
+    background: var(--sand-color);
+    box-shadow: 0 -10px 20px rgba(0, 0, 0, 0.1);
+    /* Depth */
+    z-index: 6;
+    /* On top of ocean bottom */
+    clip-path: ellipse(120% 100% at 50% 100%);
+    /* Curve */
+}
+
+.wave {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 200%;
+    height: 100%;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 88.7'%3E%3Cpath d='M800 56.9c-155.5 0-204.9-50-405.5-49.9-200 0-250 49.9-394.5 49.9v31.8h800v-.2-31.6z' fill='%23ffffff'/%3E%3C/svg%3E");
+    background-size: 50% 100%;
+    animation: wave 10s linear infinite;
+    opacity: 0.6;
+}
+
+/* Fix ocean color */
+.ocean {
+    background: linear-gradient(to bottom, var(--ocean-color), var(--ocean-dark));
+    opacity: 0.8;
+}
+
+/* Whitecaps / Foam Layers */
+.wave:nth-of-type(1) {
+    z-index: 8;
+    /* Top */
+    bottom: -20px;
+    opacity: 0.9;
+    animation-duration: 12s;
+}
+
+.wave:nth-of-type(2) {
+    z-index: 7;
+    bottom: 10px;
+    opacity: 0.7;
+    animation-duration: 18s;
+    animation-direction: reverse;
+}
+
+.wave:nth-of-type(3) {
+    z-index: 5;
+    bottom: 40px;
+    opacity: 0.4;
+    animation-duration: 8s;
+}
+
+@keyframes wave {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.palm-tree {
+    position: absolute;
+    bottom: 50px;
+    /* Moved up onto beach */
+    z-index: 20;
+    /* Above beach/waves */
+    transform-origin: bottom center;
+    filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.3));
+}
+
+.left-tree {
+    left: -20px;
+    bottom: 40px;
+    transform: rotateY(180deg);
+    animation: sway 7s ease-in-out infinite;
+}
+
+.right-mid {
+    right: 15%;
+    bottom: 80px;
+    /* Further back */
+    z-index: 18;
+    animation: sway 6s ease-in-out infinite reverse;
+}
+
+.right-main {
+    right: -20px;
+    bottom: 20px;
+    animation: sway 5s ease-in-out infinite;
+}
+
+/* Sandcastles */
+.sandcastle {
+    position: absolute;
+    bottom: 40px;
+    z-index: 19;
+}
+
+/* Dynamic Entities */
+.entity-crab {
+    position: absolute;
+    bottom: 30px;
+    font-size: 2rem;
+    z-index: 21;
+    transition: left 3s linear;
+    animation: crabBob 1s ease-in-out infinite;
+}
+
+.entity-shark {
+    position: absolute;
+    bottom: 150px;
+    /* In water */
+    font-size: 2.5rem;
+    z-index: 6;
+    /* Between waves */
+    opacity: 0.9;
+}
+
+.entity-boat {
+    position: absolute;
+    bottom: 220px;
+    /* Horizon */
+    font-size: 3rem;
+    z-index: 4;
+    opacity: 0.8;
+    filter: brightness(0.8);
+    transition: left 60s linear;
+}
+
+.entity-surfer {
+    position: absolute;
+    bottom: 110px;
+    font-size: 2.5rem;
+    z-index: 7;
+    /* Riding the wave */
+    animation: surf 4s ease-in-out infinite;
+    transition: left 20s linear;
+    bottom: 180px;
+    /* Moved up above beach height (150px) */
+}
+
+@keyframes surf {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-10px) rotate(5deg);
+    }
+}
+
+@keyframes crabBob {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-3px);
+    }
+}
+
+@keyframes sway {
+    0% {
+        transform: rotate(0deg) rotateY(var(--flip, 0deg));
+    }
+
+    50% {
+        transform: rotate(var(--rot, 2deg)) rotateY(var(--flip, 0deg));
+    }
+
+    100% {
+        transform: rotate(0deg) rotateY(var(--flip, 0deg));
+    }
+}
+
+.left-tree {
+    --flip: 180deg;
+    --rot: 2deg;
+}
+
+.right-main {
+    --flip: 0deg;
+    --rot: 2deg;
+}
+
+.right-mid {
+    --flip: 0deg;
+    --rot: -1deg;
+}
+
+/* UI Overlay & Countdown */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+    /* Let clicks pass through if needed */
+}
+
+.countdown-container {
+    background: var(--glass-bg);
+    box-shadow: var(--glass-shadow);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid var(--glass-border);
+    padding: 3rem 4rem;
+    border-radius: 24px;
+    text-align: center;
+    color: var(--text-color);
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+.title {
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    margin-bottom: 2rem;
+    font-size: 1.2rem;
+}
+
+.timer {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+}
+
+.time-unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.time-unit span {
+    font-size: 4rem;
+    font-weight: 800;
+    line-height: 1;
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.time-unit label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    opacity: 0.8;
+    margin-top: 0.5rem;
+}
+
+.year-label {
+    margin-top: 1.5rem;
+    font-size: 2rem;
+    font-weight: 500;
+    opacity: 0.9;
+}
+
+/* Fireworks Canvas */
+#fireworks-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 90;
+    /* Behind UI, in front of scene */
+    pointer-events: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .timer {
+        gap: 1rem;
+    }
+
+    .time-unit span {
+        font-size: 2.5rem;
+    }
+
+    .countdown-container {
+        padding: 2rem 1.5rem;
+        width: 90%;
+    }
+
+    .extra-clocks {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .banner {
+        font-size: 0.8rem;
+    }
+}
+
+/* --- Phase 2 Styles --- */
+
+/* Banner */
+/* Banner */
+.banner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(90deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+    color: #222;
+    text-align: center;
+    padding: 1.2rem;
+    /* Thicker */
+    font-weight: 800;
+    font-size: 1.1rem;
+    z-index: 200;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+    animation: pulseBanner 5s infinite alternate;
+}
+
+@keyframes pulseBanner {
+    0% {
+        background: linear-gradient(90deg, #ff9a9e 0%, #fecfef 50%, #ff9a9e 100%);
+        box-shadow: 0 4px 15px rgba(255, 154, 158, 0.4);
+    }
+
+    100% {
+        background: linear-gradient(90deg, #a18cd1 0%, #fbc2eb 50%, #a18cd1 100%);
+        box-shadow: 0 4px 25px rgba(161, 140, 209, 0.6);
+    }
+}
+
+/* Flying Container */
+.flying-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60%;
+    /* Only fly in sky */
+    pointer-events: none;
+    z-index: 5;
+}
+
+.flying-entity {
+    position: absolute;
+    font-size: 2rem;
+    animation: flyAcross 20s linear infinite;
+}
+
+@keyframes flyAcross {
+    0% {
+        transform: translateX(-10vw) translateY(0);
+    }
+
+    25% {
+        transform: translateX(25vw) translateY(-20px);
+    }
+
+    50% {
+        transform: translateX(50vw) translateY(0);
+    }
+
+    75% {
+        transform: translateX(75vw) translateY(20px);
+    }
+
+    100% {
+        transform: translateX(110vw) translateY(0);
+    }
+}
+
+/* Prop Classes */
+.prop-cart {
+    position: absolute;
+    z-index: 15;
+    filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.2));
+}
+
+.prop-sign {
+    position: absolute;
+    z-index: 15;
+    transform-origin: bottom center;
+    filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.3));
+}
+
+.prop-cluster {
+    position: absolute;
+    z-index: 15;
+    filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.2));
+}
+
+/* Extra Clocks */
+.extra-clocks {
+    display: flex;
+    gap: 2rem;
+    margin-top: 2rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.clock-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0.8rem 1.5rem;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    backdrop-filter: blur(4px);
+}
+
+.clock-card span {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.clock-card label {
+    font-size: 0.7rem;
+    opacity: 0.7;
+    margin-top: 0.3rem;
+    text-transform: uppercase;
+}
+
+.main-local {
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+}
+
+/* Celebration Styles */
+.title.celebrate {
+    font-size: 3rem;
+    /* BIGGER */
+    color: #fff;
+    text-shadow: 0 0 20px #ff00de, 0 0 40px #ff00de;
+    animation: pulseTitle 1s ease-in-out infinite alternate;
+}
+
+@keyframes pulseTitle {
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(1.1);
+    }
+}
+
+.timer.celebrate {
+    animation: flashRed 1s ease-in-out infinite;
+}
+
+@keyframes flashRed {
+
+    0%,
+    100% {
+        color: white;
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
+
+    50% {
+        color: #ff3333;
+        text-shadow: 0 0 20px red;
+    }
+}
+
+/* Preview Button - Hidden by default */
+/* Old duplicate block removed */
+
+.preview-btn:hover {
+    opacity: 1;
+    /* Visible on hover */
+    background: rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.preview-btn {
+    /* Position handled by container now */
+    background: rgba(255, 255, 255, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 30px;
+    cursor: pointer;
+    font-family: var(--font-main);
+    transition: all 0.3s ease;
+    pointer-events: auto;
+    z-index: 300;
+    /* Above everything */
+    font-weight: 500;
+    backdrop-filter: blur(4px);
+}
+
+.preview-btn:hover {
+    background: rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Custom CSS Sign Post */
+.sign-post-css {
+    position: fixed;
+    z-index: 500;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 900;
+    /* Rotation and styling to match the scene */
+    transform: rotate(-2deg) scale(1.5);
+    /* Scale up for visibility */
+    transform-origin: bottom left;
+    pointer-events: none;
+    filter: drop-shadow(10px 10px 10px rgba(0, 0, 0, 0.5));
+}
+
+.sign-pole {
+    width: 40px;
+    height: 800px;
+    background: repeating-linear-gradient(90deg, #3e2723 0%, #5d4037 40%, #3e2723 100%);
+    margin-left: 120px;
+    border-radius: 5px;
+    position: relative;
+}
+
+.sign-board {
+    position: absolute;
+    height: 80px;
+    background: #8d6e63;
+    background-image:
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 0) 80%, rgba(0, 0, 0, 0.2)),
+        repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(0, 0, 0, 0.05) 10px, rgba(0, 0, 0, 0.05) 20px);
+    border: 3px solid #3e2723;
+    color: #2c150e;
+    /* Dark wood text color */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    text-transform: uppercase;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.2);
+    width: 350px;
+}
+
+/* Nails in the wood */
+.sign-board::after {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: #222;
+    border-radius: 50%;
+    box-shadow: 1px 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.sign-arrow-left {
+    top: 60px;
+    left: -80px;
+    /* Arrow shape pointing left */
+    clip-path: polygon(20% 0%, 100% 0%, 100% 100%, 20% 100%, 0% 50%);
+    padding-left: 40px;
+    /* Offset for text due to clip */
+    transform: rotate(-5deg);
+}
+
+.sign-arrow-left::after {
+    right: 20px;
+    top: 35px;
+}
+
+/* Nail position */
+
+.sign-arrow-right {
+    top: 160px;
+    left: 20px;
+    /* Arrow shape pointing right */
+    clip-path: polygon(0% 0%, 80% 0%, 100% 50%, 80% 100%, 0% 100%);
+    padding-right: 40px;
+    transform: rotate(3deg);
+}
+
+.sign-arrow-right::after {
+    left: 20px;
+    top: 35px;
+}
+
+/* Nail position */
+
+/* Make text extra readable */
+.sign-text {
+    background: rgba(255, 255, 255, 0.4);
+    padding: 2px 10px;
+    border-radius: 4px;
+    border: 1px dashed rgba(62, 39, 35, 0.5);
+}

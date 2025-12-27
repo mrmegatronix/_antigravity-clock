@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NYE Countdown 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="banner">
+        JOIN US... From 8pm, Wednesday 31st December<br>
+        <span style="font-size: 0.8em; font-weight: 500;"> - for our New Years Eve Karaoke Countdown Beach Party!
+            Countdown Beach Party</span>
+    </div>
+
+    <div class="sky-container" id="sky">
+        <div class="celestial-body" id="celestial-body"></div>
+        <div class="flying-container" id="flying-container"></div>
+        <div class="stars"></div>
+        <div class="clouds"></div>
+    </div>
+
+    <div class="scene-container">
+        <!-- Ocean & Waves -->
+        <div class="ocean">
+            <div class="wave"></div>
+            <div class="wave"></div>
+            <div class="wave"></div>
+        </div>
+
+        <!-- Beach -->
+        <div class="beach">
+
+            <!-- Additional Props -->
+            <img src="assets/drinks_cart.png" class="prop-cart" style="right: 30%; bottom: 20px; height: 150px;">
+
+
+        </div>
+
+        <!-- Palm Trees (Left, Right-Mid, Right-Main) -->
+        <!-- Palm Trees (Left, Right-Mid, Right-Main) -->
+        <div class="palm-tree left-tree">
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="180px" height="180px">
+                <g>
+                    <path style="fill:#8B4513;"
+                        d="M256,512c0,0-28.7-111.6-17.6-216.4c1.8-17.1,5.2-34.1,9.8-50.6c0,0,33.5,86.6,18.9,267" />
+                    <path style="fill:#228B22;"
+                        d="M266.3,248.5c-30.8-54.6-96.6-77.9-96.6-77.9s47.9-18.7,99.9,13.2c0,0-15.3-70.8,24.9-106.3c0,0,30.3,55-6.6,103.7c0,0,67-17.7,98.6,30.1c0,0-63.5,23.1-98.3-9.9c0,0,16.2,64-32.4,94.9C255.8,296.3,256.7,268.4,266.3,248.5z" />
+                </g>
+            </svg>
+        </div>
+
+        <div class="palm-tree right-mid">
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="140px" height="140px">
+                <g>
+                    <path style="fill:#8B4513;"
+                        d="M256,512c0,0-28.7-111.6-17.6-216.4c1.8-17.1,5.2-34.1,9.8-50.6c0,0,33.5,86.6,18.9,267" />
+                    <path style="fill:#228B22;"
+                        d="M266.3,248.5c-30.8-54.6-96.6-77.9-96.6-77.9s47.9-18.7,99.9,13.2c0,0-15.3-70.8,24.9-106.3c0,0,30.3,55-6.6,103.7c0,0,67-17.7,98.6,30.1c0,0-63.5,23.1-98.3-9.9c0,0,16.2,64-32.4,94.9C255.8,296.3,256.7,268.4,266.3,248.5z" />
+                </g>
+            </svg>
+        </div>
+
+        <div class="palm-tree right-main">
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="220px" height="220px">
+                <g>
+                    <path style="fill:#8B4513;"
+                        d="M256,512c0,0-28.7-111.6-17.6-216.4c1.8-17.1,5.2-34.1,9.8-50.6c0,0,33.5,86.6,18.9,267" />
+                    <path style="fill:#228B22;"
+                        d="M266.3,248.5c-30.8-54.6-96.6-77.9-96.6-77.9s47.9-18.7,99.9,13.2c0,0-15.3-70.8,24.9-106.3c0,0,30.3,55-6.6,103.7c0,0,67-17.7,98.6,30.1c0,0-63.5,23.1-98.3-9.9c0,0,16.2,64-32.4,94.9C255.8,296.3,256.7,268.4,266.3,248.5z" />
+                </g>
+            </svg>
+        </div>
+
+        <!-- Entity Container (Crabs/Sharks/Boats) -->
+        <div id="scene-entities"></div>
+    </div>
+
+    <div class="overlay">
+        <div class="btn-container"
+            style="position: absolute; top: 120px; right: 20px; display: flex; gap: 10px; z-index: 300;">
+            <button id="reset-btn" class="preview-btn"
+                style="position: relative; top: auto; right: auto; background: rgba(0, 255, 100, 0.2);">Current
+                Time</button>
+            <button id="preview-btn" class="preview-btn" style="position: relative; top: auto; right: auto;">Preview
+                Midnight</button>
+        </div>
+        <div class="countdown-container">
+            <h1 class="title">New Year's Eve Countdown</h1>
+            <div class="timer" id="timer">
+                <div class="time-unit">
+                    <span id="days">00</span>
+                    <label>Days</label>
+                </div>
+                <div class="time-unit">
+                    <span id="hours">00</span>
+                    <label>Hours</label>
+                </div>
+                <div class="time-unit">
+                    <span id="minutes">00</span>
+                    <label>Minutes</label>
+                </div>
+                <div class="time-unit">
+                    <span id="seconds">00</span>
+                    <label>Seconds</label>
+                </div>
+            </div>
+            <h2 class="year-label">remaining until 2026</h2>
+
+            <div class="extra-clocks">
+                <!-- Sunrise -->
+                <div class="clock-card">
+                    <span class="clock-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ffaa00" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round"
+                            style="filter: drop-shadow(0 0 5px #ffaa00);">
+                            <path d="M17 18a5 5 0 0 0-10 0"></path>
+                            <line x1="12" y1="2" x2="12" y2="9"></line>
+                            <line x1="4.22" y1="10.22" x2="5.64" y2="11.64"></line>
+                            <line x1="1" y1="18" x2="3" y2="18"></line>
+                            <line x1="21" y1="18" x2="23" y2="18"></line>
+                            <line x1="18.36" y1="11.64" x2="19.78" y2="10.22"></line>
+                            <line x1="23" y1="22" x2="1" y2="22"></line>
+                            <polyline points="8 6 12 2 16 6"></polyline>
+                        </svg>
+                    </span>
+                    <span id="sunrise-time">05:45</span>
+                    <label>Sunrise</label>
+                </div>
+
+                <!-- Local Time -->
+                <div class="clock-card main-local">
+                    <span id="local-time">--:--:--</span>
+                    <label>Christchurch Local Time</label>
+                </div>
+
+                <!-- Sunset -->
+                <div class="clock-card">
+                    <span class="clock-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fd746c" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round"
+                            style="filter: drop-shadow(0 0 5px #fd746c);">
+                            <path d="M17 18a5 5 0 0 0-10 0"></path>
+                            <line x1="12" y1="9" x2="12" y2="2"></line>
+                            <line x1="4.22" y1="10.22" x2="5.64" y2="11.64"></line>
+                            <line x1="1" y1="18" x2="3" y2="18"></line>
+                            <line x1="21" y1="18" x2="23" y2="18"></line>
+                            <line x1="18.36" y1="11.64" x2="19.78" y2="10.22"></line>
+                            <line x1="23" y1="22" x2="1" y2="22"></line>
+                            <polyline points="12 9 12 2"></polyline>
+                            <polyline points="16 5 12 9 8 5"></polyline>
+                        </svg>
+                    </span>
+                    <span id="sunset-time">21:30</span>
+                    <label>Sunset</label>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- Custom CSS Sign Post (Vector Readable Text) -->
+        <div class="sign-post-css" style="left: -10px; bottom: -100px;">
+            <div class="sign-pole"></div>
+            <div class="sign-board sign-arrow-left">
+                <span class="sign-text">TO THE BAR</span>
+            </div>
+            <div class="sign-board sign-arrow-right">
+                <span class="sign-text">BEACH PARTY</span>
+            </div>
+        </div>
+
+        <canvas id="fireworks-canvas"></canvas>
+
+        <script src="script.js"></script>
+</body>
+
+</html>
