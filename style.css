@@ -623,7 +623,7 @@ body {
 /* Prop Classes */
 .prop-cart {
     position: fixed;
-    right: -8vw;
+    right: -16vw;
     bottom: -8vh;
     height: 70vh;
     z-index: 500;
@@ -762,7 +762,7 @@ body {
     /* Rotation and styling to match the scene */
     transform: rotate(-2deg) scale(clamp(0.75, 1.5vh, 1.2));
     /* Scaled for visibility */
-    left: 7vw;
+    left: 1vw;
     bottom: -15vh;
     transform-origin: bottom left;
     pointer-events: none;
