@@ -104,7 +104,10 @@ function triggerCelebration(now) {
 // --- Local Time & Extra Clocks ---
 function updateLocalTime() {
     const now = new Date();
-    localTimeDisplay.textContent = now.toLocaleTimeString('en-US', { hour12: false });
+    const h = String(now.getHours()).padStart(2, '0');
+    const m = String(now.getMinutes()).padStart(2, '0');
+    const s = String(now.getSeconds()).padStart(2, '0');
+    localTimeDisplay.innerHTML = `${h}<span class="blink">:</span>${m}<span class="blink">:</span>${s}`;
 }
 
 setInterval(() => {

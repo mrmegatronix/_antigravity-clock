@@ -423,23 +423,30 @@ body {
     z-index: 100;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
+    /* Align to top to avoid bottom props */
+    padding-top: 12vh;
+    /* Push down from top */
     pointer-events: none;
     /* Let clicks pass through if needed */
 }
 
 .countdown-container {
-    background: var(--glass-bg);
-    box-shadow: var(--glass-shadow);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid var(--glass-border);
-    padding: clamp(2rem, 5vh, 4rem) clamp(2rem, 5vw, 6rem);
-    border-radius: 32px;
+    background: none;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border: none;
+    padding: clamp(1.5rem, 5vh, 4rem) clamp(2rem, 4vw, 6rem);
+    /* Balanced padding */
+    border-radius: 48px;
     text-align: center;
     color: var(--text-color);
     animation: float 6s ease-in-out infinite;
-    max-width: 90vw;
+    max-width: 50vw;
+    /* Strictly confined to center */
+    width: auto;
+    /* margin-bottom removed, handled by overlay padding */
 }
 
 @keyframes float {
@@ -460,14 +467,38 @@ body {
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.3em;
-    margin-bottom: 2.5rem;
-    font-size: clamp(1.5rem, 4vh, 3rem);
+    margin-bottom: 2vh;
+    font-size: clamp(2rem, 6vh, 5rem);
+    /* Balanced size */
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
 }
 
 .timer {
     display: flex;
-    gap: clamp(1rem, 4vw, 3rem);
+    gap: clamp(0.5rem, 2vw, 2rem);
     justify-content: center;
+    align-items: baseline;
+    /* Align digits and colons on their text baseline */
+}
+
+.timer-colon {
+    font-size: clamp(3rem, 18vh, 12rem);
+    /* Safe sizing */
+    font-weight: 800;
+    line-height: 1;
+    color: #ffd700;
+    /* Gold */
+    text-shadow:
+        3px 3px 0 #000,
+        -1px -1px 0 #000,
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000,
+        5px 5px 10px rgba(0, 0, 0, 0.8),
+        0 0 20px rgba(255, 215, 0, 0.4);
+
+    position: relative;
+    /* Slight optical adjustment if needed */
 }
 
 .time-unit {
@@ -477,28 +508,44 @@ body {
 }
 
 .time-unit span {
-    font-size: clamp(3rem, 10vh, 7rem);
+    font-size: clamp(3rem, 18vh, 12rem);
+    /* Safe sizing */
     font-weight: 800;
     line-height: 1;
-    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    color: #ffd700;
+    /* Gold */
+    text-shadow:
+        3px 3px 0 #000,
+        -1px -1px 0 #000,
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000,
+        5px 5px 10px rgba(0, 0, 0, 0.8),
+        0 0 20px rgba(255, 215, 0, 0.4);
+    /* Glow */
 }
 
 .time-unit label {
-    font-size: clamp(0.7rem, 1.5vh, 1rem);
+    font-size: clamp(1rem, 3vh, 2.5rem);
+    /* Balanced label size */
     text-transform: uppercase;
     font-weight: 800;
     letter-spacing: 2px;
     opacity: 0.9;
     margin-top: 0.8rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    /* Added shadow */
 }
 
 .year-label {
-    margin-top: 2rem;
-    font-size: clamp(1.5rem, 4vh, 2.8rem);
+    margin-top: 3vh;
+    font-size: clamp(2rem, 5vh, 3.5rem);
     font-weight: 800;
     opacity: 0.95;
     letter-spacing: 2px;
     text-transform: uppercase;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    /* Added shadow */
 }
 
 /* Fireworks Canvas */
@@ -560,6 +607,8 @@ body {
     letter-spacing: 2px;
     border-bottom: 2px solid rgba(255, 255, 255, 0.5);
     animation: pulseBanner 5s infinite alternate;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    /* Added shadow */
 }
 
 .banner-subtext {
@@ -654,33 +703,61 @@ body {
 }
 
 .clock-card {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 0.8rem 1.5rem;
+    background: none;
+    border: none;
+    box-shadow: none;
+    backdrop-filter: none;
+    padding: clamp(0.2rem, 1vh, 0.5rem) clamp(1rem, 2vw, 1.5rem);
+    /* Reduced padding since no box */
     border-radius: 12px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    backdrop-filter: blur(4px);
+}
+
+.blink {
+    animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+    50% {
+        opacity: 0;
+    }
 }
 
 .clock-card span {
-    font-size: clamp(1.2rem, 3vh, 1.8rem);
+    font-size: clamp(1.5rem, 4vh, 2.5rem);
     font-weight: 800;
+    color: #ffd700;
+    /* Gold */
+    text-shadow:
+        2px 2px 0 #000,
+        -1px -1px 0 #000,
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000,
+        3px 3px 5px rgba(0, 0, 0, 0.8);
 }
 
 .clock-card label {
-    font-size: clamp(0.7rem, 1.2vh, 0.9rem);
+    font-size: clamp(1rem, 2vh, 1.5rem);
     opacity: 0.8;
     margin-top: 0.5rem;
     text-transform: uppercase;
     font-weight: 800;
     letter-spacing: 1px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    /* Added shadow */
+}
+
+.clock-icon svg {
+    width: clamp(2.5rem, 5vh, 4rem);
+    height: clamp(2.5rem, 5vh, 4rem);
 }
 
 .main-local {
-    background: rgba(255, 255, 255, 0.15);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: none;
+    border: none;
     transform: scale(1.15);
     margin: 0 1rem;
 }
@@ -756,13 +833,13 @@ body {
 
 .sign-post-css {
     position: fixed;
-    z-index: 500;
+    z-index: 50;
     font-family: 'Courier New', Courier, monospace;
     font-weight: 900;
     /* Rotation and styling to match the scene */
-    transform: rotate(-2deg) scale(clamp(0.75, 1.5vh, 1.2));
+    transform: rotate(-2deg) scale(clamp(0.33, 0.68vh, 0.54));
     /* Scaled for visibility */
-    left: 1vw;
+    left: 8vw;
     bottom: -15vh;
     transform-origin: bottom left;
     pointer-events: none;
@@ -796,7 +873,8 @@ body {
     font-weight: 800;
     text-transform: uppercase;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.2);
+    text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.1), 1px 1px 2px rgba(0, 0, 0, 0.8);
+    /* Added dark shadow */
     width: 350px;
 }
 

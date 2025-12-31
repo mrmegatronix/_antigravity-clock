@@ -43,8 +43,7 @@
 
         </div>
 
-        <!-- Drinks Cart (outside beach to avoid clip-path) -->
-        <img src="assets/drinks_cart.png" class="prop-cart">
+
 
         <!-- Palm Trees - Multiple for depth -->
         <!-- Far left palm -->
@@ -159,6 +158,23 @@
     <div id="scene-entities"></div>
     </div>
 
+    <!-- Drinks Cart (moved to root to avoid overlap) -->
+    <img src="assets/drinks_cart.png" class="prop-cart">
+
+    <!-- Custom CSS Sign Post (Vector Readable Text) -->
+    <div class="sign-post-css">
+        <div class="sign-pole"></div>
+        <div class="sign-board sign-top">
+            <span class="sign-text">WELCOME TO THE BEACH PARTY</span>
+        </div>
+        <div class="sign-board sign-mid">
+            <span class="sign-text">SING A SONG</span>
+        </div>
+        <div class="sign-board sign-low">
+            <span class="sign-text">GET A DRINK</span>
+        </div>
+    </div>
+
     <div class="overlay">
         <div class="btn-container"
             style="position: absolute; top: 120px; right: 20px; display: flex; gap: 10px; z-index: 300;">
@@ -175,14 +191,17 @@
                     <span id="days">00</span>
                     <label>Days</label>
                 </div>
+                <div class="timer-colon blink">:</div>
                 <div class="time-unit">
                     <span id="hours">00</span>
                     <label>Hours</label>
                 </div>
+                <div class="timer-colon blink">:</div>
                 <div class="time-unit">
                     <span id="minutes">00</span>
                     <label>Minutes</label>
                 </div>
+                <div class="timer-colon blink">:</div>
                 <div class="time-unit">
                     <span id="seconds">00</span>
                     <label>Seconds</label>
@@ -241,23 +260,9 @@
         </div>
 
 
-
-        <!-- Custom CSS Sign Post (Vector Readable Text) -->
-        <div class="sign-post-css">
-            <img src="assets/logo.png" class="sign-logo">
-            <div class="sign-pole"></div>
-            <div class="sign-board sign-top">
-                <span class="sign-text">WELCOME TO THE BEACH PARTY</span>
-            </div>
-            <div class="sign-board sign-mid">
-                <span class="sign-text">SING A SONG</span>
-            </div>
-            <div class="sign-board sign-low">
-                <span class="sign-text">GET A DRINK</span>
-            </div>
-        </div>
-
         <canvas id="fireworks-canvas"></canvas>
+
+
 
         <script src="script.js"></script>
 </body>
